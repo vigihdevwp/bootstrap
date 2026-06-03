@@ -1,0 +1,44 @@
+{
+    "name": "vigihdevwp/bootstrap",
+    "description": "WordPress bootstrap – popular framework for building.",
+    "type": "library",
+    "license": "Mit",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "keywords": [
+        "wordpress",
+        "bootstrap",
+        "css",
+        "js"
+    ],
+    "authors": [
+        {
+            "name": "vigih dev",
+            "email": "vigihdevwp@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "yiisoft/html": "^4.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "10.5.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "VigihdevWP\\Bootstrap\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "VigihdevWP\\Bootstrap\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "dev": "php -S localhost:4377 local-dev/index.php"
+    },
+    "config": {
+        "process-timeout": 0
+    }
+}
