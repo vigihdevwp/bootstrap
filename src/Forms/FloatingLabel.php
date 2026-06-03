@@ -28,10 +28,18 @@ final class FloatingLabel extends Field
         private readonly string $icon,
         private readonly string $type = 'text',
         private readonly ?string $value = null,
-        private readonly string $variant = 'primary',
+        private readonly string $variant = 'secondary',
         private readonly array $options = []
     ) {
+
         $this->id = $this->name . '-' . bin2hex(random_bytes(3));
+
+        $this->wrapperOptions = [
+            'class' => sprintf(
+                $this->wrapperOptions['class'] . ' textfield-%s',
+                $this->variant
+            )
+        ];
     }
 
     public function inputGroupOptions(array $options): self
@@ -51,10 +59,7 @@ final class FloatingLabel extends Field
     public function wrapperOptions(array $options): self
     {
         $class = $this->removeClass($options);
-        $this->wrapperOptions = ArrayHelper::merge(
-            $this->addClass($this->wrapperOptions, $class . ' textfield-' . $this->variant),
-            $options
-        );
+        $this->wrapperOptions = ArrayHelper::merge($this->addClass($this->wrapperOptions, $class), $options);
         return $this;
     }
 
@@ -62,11 +67,15 @@ final class FloatingLabel extends Field
     {
         return implode('', [
             Html::openTag('div', $this->inputGroupOptions),
-            $this->label(),
-            Html::openTag('div', $this->wrapperOptions),
             $this->prepend(),
+
+            Html::openTag('div', $this->wrapperOptions),
+            Html::openTag('div', ['class' => 'textfield-outline-wrapper']),
+            $this->label(),
             $this->textInput(),
-            Html::closeTag('div'), // form-group
+            Html::closeTag('div'),
+            Html::closeTag('div'), // wrapperOptions
+
             Html::closeTag('div'), // input-group
         ]);
     }
