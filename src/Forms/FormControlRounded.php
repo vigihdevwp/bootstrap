@@ -7,7 +7,7 @@ namespace VigihdevWP\Bootstrap\Forms;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
-final class FloatingLabel extends Field
+final class FormControlRounded extends Field
 {
 
     private string $id = '';
@@ -21,8 +21,9 @@ final class FloatingLabel extends Field
     ];
 
     private array $wrapperOptions = [
-        'class' => 'form-group textfield textfield-outline textfield-floating-label'
+        'class' => 'form-group form-group-rounded'
     ];
+
 
     public function __construct(
         private readonly string $name,
@@ -31,6 +32,7 @@ final class FloatingLabel extends Field
         private readonly string $type = 'text',
         private readonly ?string $value = null,
         private readonly string $variant = 'secondary',
+        private readonly string $rounded = 'filled',
         private readonly array $options = []
     ) {
 
@@ -38,8 +40,9 @@ final class FloatingLabel extends Field
 
         $this->wrapperOptions = [
             'class' => sprintf(
-                $this->wrapperOptions['class'] . ' textfield-%s',
-                $this->variant
+                $this->wrapperOptions['class'] . ' form-group-rounded-%s form-group-rounded-%s',
+                $this->variant,
+                $this->rounded,
             )
         ];
 
@@ -72,43 +75,26 @@ final class FloatingLabel extends Field
     public function render(): string
     {
         return implode('', [
+            Html::openTag('div', $this->wrapperOptions),
+            $this->label(),
             Html::openTag('div', $this->inputGroupOptions),
             $this->prepend(),
-
-            Html::openTag('div', $this->wrapperOptions),
-            Html::openTag('div', ['class' => 'textfield-outline-wrapper']),
-            $this->label(),
             $this->textInput(),
-            Html::closeTag('div'),
+            Html::closeTag('div'), // input-group
             Html::closeTag('div'), // wrapperOptions
 
-            Html::closeTag('div'), // input-group
         ]);
     }
 
     private function textInput(): string
     {
-        $options = $this->inputOptions;
-        $class = ArrayHelper::remove($options, 'class');
-        $class = $class ? ' ' . $class : null;
-
         return Html::input($this->type, $this->name, $this->value, $this->inputOptions)->__toString();
     }
 
     private function label(): string
     {
 
-        return implode('', [
-            Html::openTag('div', ['class' => 'textfield-label-wrapper']),
-            Html::div('', ['class' => 'textfield-outline-left']),
-
-            Html::openTag('div', ['class' => 'textfield-outline-middle']),
-            Html::label($this->label, '#' . $this->id)->addClass('control-label'),
-            Html::closeTag('div'),
-
-            Html::div('', ['class' => 'textfield-outline-right']),
-            Html::closeTag('div'),
-        ]);
+        return Html::label($this->label, '#' . $this->id)->addClass('control-label')->__toString();
     }
 
     private function prepend(): string
