@@ -17,7 +17,7 @@ final class FormControlRounded extends Field
     ];
 
     private array $inputGroupOptions = [
-        'class' => 'input-group input-group-outline input-group-icon'
+        'class' => 'input-group flex-nowrap input-group-rounded input-group-icon'
     ];
 
     private array $wrapperOptions = [
