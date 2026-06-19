@@ -9,12 +9,14 @@ phpunit.xml
 local-dev
 dev.php
 composer.lock
-vendor
+/vendor
 /tests
 /config
 scripts
 node_modules
-
+# /docs
+# /assets
+jsconfig.json
 package.json
 package-lock.json
 nodemon.json

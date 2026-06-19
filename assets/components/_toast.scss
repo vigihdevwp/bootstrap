@@ -1,0 +1,36 @@
+.toast {
+    padding: 16px;
+    @include material-shadow(2);
+    &:not(:last-child) {
+        margin-bottom: 0;
+    }
+    .toast-close {
+    }
+    &.toast-bottom-left,
+    &.toast-bottom-center,
+    &.toast-bottom-right {
+        position: fixed;
+        z-index: $toast-z-index;
+        bottom: $toast-bottom-margin;
+    }
+
+    &.toast-bottom-left {
+        left: $toast-bottom-margin;
+    }
+    &.toast-bottom-center {
+        left: 50%;
+        @include transform-translateX(-50%);
+    }
+    &.toast-bottom-right {
+        right: $toast-bottom-margin;
+    }
+}
+
+// Theme color
+@each $color, $value in $theme-colors {
+    .toast.toast-#{$color} {
+        background-color: $value;
+        color: color-yiq($value);
+        border: 1px solid $value;
+    }
+}

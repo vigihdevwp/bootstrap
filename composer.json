@@ -36,7 +36,8 @@
     },
     "scripts": {
         "test": "phpunit",
-        "dev": "php -S localhost:4377 local-dev/index.php"
+        "dev": "php -S localhost:4377 local-dev/index.php",
+        "docs": "php -S localhost:4376 docs/index.php"
     },
     "config": {
         "process-timeout": 0

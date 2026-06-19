@@ -1,0 +1,52 @@
+.toast-custom {
+    position: fixed;
+    z-index: 1060;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    @include border-radius(4px);
+    @include material-shadow(1);
+    &.toast-custom-bottom {
+        bottom: 4px;
+
+        &-left {
+            left: 4px;
+        }
+        &-right {
+            right: 0;
+        }
+        &-center {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+.toast-custom-item {
+    display: flex;
+    align-items: center;
+    border-radius: inherit;
+    .material-icons,
+    .material-icons-outlined {
+    }
+    .toast-icons {
+    }
+    .toast-image {
+    }
+    .toast-message {
+        margin-left: 8px;
+    }
+}
+
+// Theme color
+@each $color, $value in $theme-colors {
+    .toast-custom-#{$color} {
+        background-color: $value;
+        color: color-yiq($value);
+    }
+    .toast-custom-outline-#{$color} {
+        border: 1px solid $value;
+        color: $value;
+    }
+}

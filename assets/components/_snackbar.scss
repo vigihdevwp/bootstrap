@@ -1,0 +1,86 @@
+.snackbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: max-content;
+    padding: $snackbar-padding-y $snackbar-padding-x;
+    @include border-radius(4px);
+    @include material-shadow(1);
+    @include transition($snackbar-transition);
+    min-width: $snackbar-min-width;
+    max-width: $snackbar-max-width;
+    .material-icons,
+    .material-icons-outlined {
+        margin-right: 8px;
+    }
+    .snackbar-text {
+    }
+    .snackbar-link {
+        font-weight: 700;
+        margin-right: 4px;
+        margin-left: 4px;
+        text-decoration: none;
+    }
+
+    &[data-placement="bottom-left"],
+    &[data-placement="bottom-center"],
+    &[data-placement="bottom-right"] {
+        position: fixed;
+        bottom: 4px;
+        z-index: 9999;
+    }
+    &[data-placement="bottom-left"] {
+        left: 4px;
+    }
+    &[data-placement="bottom-center"] {
+        left: 50%;
+        @include transform-translate(-50%, 20px);
+        &.show {
+            @include transform-translate(-50%, 0);
+        }
+    }
+    &[data-placement="bottom-right"] {
+        right: 4px;
+    }
+    &.hide {
+        display: none !important;
+        opacity: 0;
+        @include transform-translateY(20px);
+    }
+    &.show {
+        opacity: 1;
+        @include transform-translateY(0);
+    }
+}
+
+// Theme color
+@each $color, $value in $theme-colors {
+    .snackbar.snackbar-#{$color} {
+        background-color: $value;
+        color: color-yiq($value);
+
+        @include hover() {
+            color: color-yiq($value);
+            background-color: darken($value, 7.5%);
+            border-color: darken($value, 10%);
+        }
+
+        &:focus,
+        &.focus {
+            color: color-yiq($value);
+            background-color: darken($value, 7.5%);
+            border-color: darken($value, 10%);
+            box-shadow: 0 0 0 $btn-focus-width rgba($value, 0.5);
+        }
+
+        .snackbar-link {
+            color: color-yiq($value);
+            @include hover() {
+                color: darken(color-yiq($value), 10%);
+            }
+            &:focus {
+                color: darken(color-yiq($value), 10%);
+            }
+        }
+    }
+}

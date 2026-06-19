@@ -1,0 +1,17 @@
+// import from assets
+@import "../../../assets/bootstrap/scss/functions";
+@import "../../../assets/bootstrap/scss/variables";
+@import "../../../assets/bootstrap/scss/mixins";
+@import "../../../assets/mixins";
+
+@import "variables";
+@import "font-poppins";
+
+@import "base/typography";
+@import "base/reset";
+@import "layout/main";
+@import "layout/app-sidebar";
+@import "layout/app-main";
+@import "layout/footer";
+
+@import "content";

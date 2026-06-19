@@ -1,0 +1,27 @@
+.app-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    .app-sidebar,
+    .app-main {
+        display: flex;
+        flex-direction: column;
+    }
+    .app-sidebar {
+        flex: 0 0 $app-sidebar-width;
+        display: flex;
+        border-right: 1px solid $app-sidebar-border-color;
+        overflow: hidden;
+        @include transition($app-sidebar-transition);
+        opacity: 1;
+        &.sidebar-none {
+            flex: 0 0 0px;
+            width: 0px;
+            opacity: 0;
+            border-right: 0 solid transparent;
+        }
+    }
+    .app-main {
+        flex: auto;
+    }
+}

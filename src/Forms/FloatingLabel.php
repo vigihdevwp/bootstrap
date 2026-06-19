@@ -24,6 +24,8 @@ final class FloatingLabel extends Field
         'class' => 'form-group textfield textfield-outline textfield-floating-label'
     ];
 
+    private ?string $append = null;
+
     public function __construct(
         private readonly string $name,
         private readonly string $label,
@@ -62,6 +64,12 @@ final class FloatingLabel extends Field
         return $this;
     }
 
+    public function addAppend(string $icon, array $options = []): self
+    {
+        $this->append = $this->append($icon, $options);
+        return $this;
+    }
+
     public function wrapperOptions(array $options): self
     {
         $class = $this->removeClass($options);
@@ -82,6 +90,7 @@ final class FloatingLabel extends Field
             Html::closeTag('div'),
             Html::closeTag('div'), // wrapperOptions
 
+            $this->append,
             Html::closeTag('div'), // input-group
         ]);
     }
@@ -117,6 +126,17 @@ final class FloatingLabel extends Field
             Html::openTag('div', ['class' => 'input-group-prepend']),
             Html::openTag('div', ['class' => 'input-group-text']),
             Html::span($this->icon, ['class' => 'material-icons-outlined']),
+            Html::closeTag('div'),
+            Html::closeTag('div')
+        ]);
+    }
+
+    private function append(string $icon, array $options = []): string
+    {
+        return implode('', [
+            Html::openTag('div', ['class' => 'input-group-append']),
+            Html::openTag('div', ['class' => 'input-group-text']),
+            Html::span($icon, ['class' => 'material-icons-outlined']),
             Html::closeTag('div'),
             Html::closeTag('div')
         ]);

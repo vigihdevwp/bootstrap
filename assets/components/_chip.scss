@@ -1,0 +1,63 @@
+.chip {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: $chip-padding-y $chip-padding-x;
+    border-radius: $chip-border-radius;
+    font-size: $chip-font-size;
+    width: fit-content;
+    @include transition($chip-transition);
+    &.chip-sm {
+        padding: $chip-sm-padding-y $chip-sm-padding-x;
+        border-radius: $chip-sm-border-radius;
+        font-size: $chip-sm-font-size;
+    }
+    .material-icons,
+    .material-icons-outlined {
+        &.chip-close {
+            font-size: calc(#{$chip-font-size} + 4px);
+            font-weight: bold;
+            text-shadow: 0 1px 0 #fff;
+            @include transitionLong(color, 0.2s);
+            @include hover() {
+                color: #000;
+            }
+        }
+    }
+    .chip-image {
+        @include size($chip-img-size);
+        @include border-radius(50%);
+        margin-left: -8px;
+    }
+}
+
+// Theme color
+@each $color, $value in $theme-colors {
+    .chip-#{$color} {
+        background-color: $value;
+        color: color-yiq($value);
+        @include hover() {
+            color: color-yiq($value);
+            background-color: darken($value, 7.5%);
+        }
+        &:focus,
+        &.focus {
+            color: color-yiq($value);
+            background-color: darken($value, 7.5%);
+        }
+    }
+
+    .chip-outline-#{$color} {
+        border: 1px solid;
+        border-color: $value;
+        color: $value;
+        @include hover() {
+            color: darken($value, 10%);
+        }
+        &:focus,
+        &.focus {
+            color: darken($value, 10%);
+        }
+    }
+}

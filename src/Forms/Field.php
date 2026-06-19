@@ -10,6 +10,8 @@ use Yiisoft\Html\Html;
 abstract class Field
 {
 
+    public function __construct() {}
+
     protected function removeClass(array &$options): ?string
     {
         return ArrayHelper::remove($options, 'class');

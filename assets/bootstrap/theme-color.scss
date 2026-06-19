@@ -1,0 +1,57 @@
+// Opsi 1: Clean & Professional Tech (Rekomendasi Utama)
+// Definisikan warna kustom dulu
+$my-indigo: #4f46e5;
+$my-slate: #4b5563;
+$my-emerald: #10b981;
+$my-sky: #0ea5e9;
+$my-amber: #f59e0b;
+$my-rose: #f43f5e;
+$my-zinc-50: #f8fafc;
+$my-zinc-900: #0f172a;
+
+$primary: $my-indigo !default;
+$secondary: $my-slate !default;
+$success: $my-emerald !default;
+$info: $my-sky !default;
+$warning: $my-amber !default;
+$danger: $my-rose !default;
+$light: $my-zinc-50 !default;
+$dark: $my-zinc-900 !default;
+
+// Opsi 2: Deep Oceanic (Nuansa Biru Gelap)
+$ocean-blue: #0284c7;
+$ocean-gray: #64748b;
+$teal-green: #0d9488;
+$cyan-light: #06b6d4;
+$orange-warn: #ea580c;
+$crimson-red: #e11d48;
+$ghost-white: #f1f5f9;
+$navy-dark: #1e293b;
+
+$primary: $ocean-blue !default;
+$secondary: $ocean-gray !default;
+$success: $teal-green !default;
+$info: $cyan-light !default;
+$warning: $orange-warn !default;
+$danger: $crimson-red !default;
+$light: $ghost-white !default;
+$dark: $navy-dark !default;
+
+// Opsi 3: Minimalist Nordic / Pastel Soft
+$nordic-blue: #5c7cfa;
+$nordic-gray: #868e96;
+$mint-green: #2b8a3e;
+$ice-blue: #339af0;
+$soft-yellow: #fab005;
+$soft-red: #fa5252;
+$snow-white: #f8f9fa;
+$coal-black: #212529;
+
+$primary: $nordic-blue !default;
+$secondary: $nordic-gray !default;
+$success: $mint-green !default;
+$info: $ice-blue !default;
+$warning: $soft-yellow !default;
+$danger: $soft-red !default;
+$light: $snow-white !default;
+$dark: $coal-black !default;

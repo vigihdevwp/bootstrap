@@ -1,0 +1,16 @@
+.app-main {
+    .navbar {
+        border-bottom: 1px solid #ececec;
+        .navbar-nav {
+            .nav-item {
+                .nav-link {
+                    &[data-toggle] {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
+}

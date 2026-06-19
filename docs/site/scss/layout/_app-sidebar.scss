@@ -1,0 +1,52 @@
+.app-sidebar {
+    background: #fdfdfd;
+    .sidebar-brand {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        .brand-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+    }
+    ul {
+        li {
+            button[data-toggle="collapse"] {
+                font-size: 1.1em;
+                color: #333;
+                font-weight: 600;
+                padding-left: 12px;
+            }
+            .collapsing,
+            .collapse {
+                ul {
+                    li {
+                        padding: 4px 12px;
+                        display: flex;
+                        align-items: center;
+                        @include transitions(background, 0.2s);
+                        .material-icons-outlined,
+                        a {
+                            color: #333;
+                        }
+                        .material-icons-outlined {
+                            font-size: 16px;
+                            margin-right: 8px;
+                        }
+                        &.active {
+                            background: #f0f0f0;
+                            .material-icons-outlined,
+                            a {
+                                color: $primary;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

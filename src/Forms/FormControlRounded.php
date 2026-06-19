@@ -31,7 +31,7 @@ final class FormControlRounded extends Field
         private readonly string $icon,
         private readonly string $type = 'text',
         private readonly ?string $value = null,
-        private readonly string $variant = 'secondary',
+        private readonly string $variant = 'primary',
         private readonly string $rounded = 'filled',
         private readonly array $options = []
     ) {

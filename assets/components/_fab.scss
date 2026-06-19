@@ -1,0 +1,63 @@
+.fab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background: none;
+    -webkit-tap-highlight-color: transparent;
+
+    @include border-radius(50%);
+    @include material-shadow(2);
+    @include size($fab-size-md);
+    @include user-select-none;
+    @include transition($btn-transition);
+    .material-icons,
+    .material-icons-outlined {
+        font-size: $fab-font-size-md;
+    }
+}
+
+//
+// Fab Sizes
+//
+
+.fab-lg {
+    @include size($fab-size-lg);
+    .material-icons,
+    .material-icons-outlined {
+        font-size: $fab-font-size-lg;
+    }
+}
+
+.fab-sm {
+    @include size($fab-size-sm);
+    .material-icons,
+    .material-icons-outlined {
+        font-size: $fab-font-size-sm;
+    }
+}
+
+// theme colors
+@each $color, $value in $theme-colors {
+    .fab.fab-#{$color} {
+        background-color: $value;
+        color: color-yiq($value);
+
+        @include hover() {
+            color: color-yiq($value);
+            background-color: darken($value, 7.5%);
+            border-color: darken($value, 10%);
+        }
+
+        &:focus,
+        &.focus {
+            color: color-yiq($value);
+            background-color: darken($value, 7.5%);
+            border-color: darken($value, 10%);
+            box-shadow: 0 0 0 $btn-focus-width rgba($value, 0.5);
+        }
+    }
+}

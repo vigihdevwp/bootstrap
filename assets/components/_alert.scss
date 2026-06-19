@@ -1,0 +1,24 @@
+.alert {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+@each $color, $value in $theme-colors {
+    .alert.alert-solid-#{$color} {
+        background: $value;
+        border: 1px solid $value;
+        color: color-yiq($value);
+        .material-icons,
+        .material-icons-outlined {
+        }
+    }
+
+    .alert.alert-outline-#{$color} {
+        border: 1px solid $value;
+        color: $value;
+        .material-icons,
+        .material-icons-outlined {
+        }
+    }
+}
