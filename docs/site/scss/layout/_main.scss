@@ -22,6 +22,6 @@
         }
     }
     .app-main {
-        flex: auto;
+        flex: 0 0 calc(100% - #{$app-sidebar-width});
     }
 }

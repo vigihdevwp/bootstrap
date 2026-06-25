@@ -15,3 +15,8 @@
 <link href="/dist/css/bootstrap.css" rel="stylesheet">
 <link href="/dist/css/app.css" rel="stylesheet">
 <link href="/dist/css/site.css" rel="stylesheet">
+<link href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+<link href="/dist/css/owl.carousel.css" rel="stylesheet">
+<link href="/dist/css/select2.css" rel="stylesheet">
+<link href="/dist/css/date-time-picker.css" rel="stylesheet">

@@ -47,4 +47,14 @@ use Yiisoft\Html\Html;
             ->render(); ?>
     </li>
 
+    <li class="mb-1">
+        <?= Template::collapseBtn('vendor--', 'Vendor') ?>
+        <?= (new Collapse(id: 'vendor--'))
+            ->add('Select2', '/views/vendor/select2.php')
+            ->add('Typeahead', '/views/vendor/typeahead.php')
+            ->add('Date Time Picker', '/views/vendor/date-time-picker.php')
+            ->add('Owl Carousel', '/views/vendor/owl-carousel.php')
+            ->render(); ?>
+    </li>
+
 </ul>

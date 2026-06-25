@@ -1,0 +1,94 @@
+.select2-container.select2-container--bootstrap {
+    width: 100% !important;
+    @include plain-hover-focus {
+        outline: none;
+    }
+    .selection {
+        .select2-selection.select2-selection--single {
+            height: 48px;
+            display: flex;
+            align-items: center;
+            outline: none;
+            .select2-selection__placeholder {
+            }
+            .select2-selection__clear {
+                position: absolute;
+                right: 9px;
+                height: calc(1.5em + 1.75rem);
+                width: 18px;
+                font-size: 1.3em;
+                font-weight: 700;
+                color: #000;
+            }
+            .select2-selection__arrow {
+                display: flex;
+                align-items: center;
+                align-content: center;
+                .material-icons-outlined {
+                    position: absolute;
+                    right: 9px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    &.selecting {
+                        right: 22px;
+                    }
+                }
+            }
+            .select2-selection__rendered {
+                padding-left: 40px;
+            }
+        }
+    }
+
+    .select2-dropdown {
+        background: #fff;
+        @include material-shadow(2);
+        @include border-bottom-radius(8px);
+        border: 1px solid $primary;
+        border-top: 0;
+        &.select2-dropdown--below,
+        &.select2-dropdown--above {
+            .select2-search.select2-search--dropdown {
+                position: relative;
+                padding: 0;
+                margin: 0;
+                .select2-search__field {
+                    outline: none;
+                    box-shadow: none;
+                    border: unset;
+                    border-bottom: 1px solid $gray-500;
+                    line-height: 24px;
+                    background: #fff;
+                    width: 100%;
+                    padding-left: 8px;
+                    color: #666;
+                }
+            }
+            .select2-results {
+                .select2-results__options {
+                    overflow-y: scroll;
+                    max-height: 380px;
+                    height: auto;
+                    @include hiddenScroll();
+                    .select2-results__option {
+                        border-bottom: 1px solid rgb($secondary, 50%);
+                        padding: 10px;
+                        @include transition(background-color, 03ms, ease-in-out);
+                        &[aria-disabled="true"] {
+                            color: #999;
+                        }
+                        &.select2-results__option--highlighted {
+                            background-color: #efefef;
+                        }
+                        &.select2-results__option--selectable {
+                        }
+                        &:last-child {
+                            border-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -195,6 +195,11 @@ body {
   font-weight: 400;
 }
 
+html {
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
 .btn:focus {
   box-shadow: none;
 }
@@ -229,7 +234,7 @@ body {
   border-right: 0 solid transparent;
 }
 .app-wrapper .app-main {
-  flex: auto;
+  flex: 0 0 calc(100% - 240px);
 }
 
 .app-sidebar {
