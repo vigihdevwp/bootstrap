@@ -341,8 +341,10 @@
     const TEXTFIELD_FLOATING_ACTIVE = 'textfield-floating-label-active'
     const TEXTFIELD_FLOATING_COMPLETED = 'textfield-floating-label-completed'
     const EVENT = {
-        floating_active: 'floatingActive.textfield',
-        floating_completed: 'floatingCompleted.textfield',
+        active: 'active.textfield',
+        completed: 'completed.textfield',
+        off_active: 'offActive.textfield',
+        off_completed: 'offCompleted.textfield',
     }
 
     /**
@@ -366,62 +368,99 @@
         constructor(textfield) {
 
             this.textfield = $(textfield);
-
             this.textInput = this.textfield.find('input.form-control');
-            if (this.textInput?.length > 0) {
+            this.#init()
+            this.#onListener()
 
-                this.textInput
-                    .on('focus', (event) => {
-                        $(event.target).closest('.' + TEXTFIELD_FLOATING)
-                            .addClass(TEXTFIELD_FLOATING_ACTIVE)
-                            .addClass(TEXTFIELD_FLOATING_COMPLETED)
-                    })
-                    .on('focusout', (event) => {
-                        $(event.target).closest('.' + TEXTFIELD_FLOATING).removeClass(TEXTFIELD_FLOATING_ACTIVE);
-                        let value = $(event.target)?.val();
-                        if (value?.length === 0) {
-                            $(event.target).closest('.' + TEXTFIELD_FLOATING).removeClass(TEXTFIELD_FLOATING_COMPLETED);
-                        }
-                    })
-                    .on(EVENT.floating_active, (event) => {
-                        $(event.target).closest('.' + TEXTFIELD_FLOATING)
-                            .addClass(TEXTFIELD_FLOATING_ACTIVE)
-                            .addClass(TEXTFIELD_FLOATING_COMPLETED)
-                    })
-                    .on(EVENT.floating_completed, (event) => {
-                        $(event.target).closest('.' + TEXTFIELD_FLOATING).removeClass(TEXTFIELD_FLOATING_ACTIVE);
-                        let value = $(event.target)?.val();
-                        if (value?.length === 0) {
-                            $(event.target).closest('.' + TEXTFIELD_FLOATING).removeClass(TEXTFIELD_FLOATING_COMPLETED);
-                        }
-                    })
+        }
 
-                timeOut(700, () => {
-                    if (this.textInput.val().length > 0) {
-                        this.textInput.closest('.' + TEXTFIELD_FLOATING).addClass(TEXTFIELD_FLOATING_COMPLETED)
+        #init() {
+            if (this.textInput.val().length > 0) {
+                this.#setCompleted(this.textInput)
+            }
+        }
+        #onListener() {
+
+            this.textInput
+                .on('focus', (event) => {
+                    this.#setActive(event.currentTarget, true)
+                    this.#setCompleted(event.currentTarget, true)
+                })
+                .on('focusout', (event) => {
+                    this.#setActive(event.currentTarget, false)
+                    let value = $(event.currentTarget).val();
+                    if (value?.length === 0) {
+                        this.#setCompleted(event.currentTarget, false)
                     }
                 })
+                .on(EVENT.active, (event) => {
+                    this.#setActive(event.currentTarget, true)
+                })
+                .on(EVENT.completed, (event) => {
+                    this.#setCompleted(event.currentTarget, true)
+                })
+                .on(EVENT.off_active, (event) => {
+                    this.#setActive(event.currentTarget, false)
+                })
+                .on(EVENT.off_completed, (event) => {
+                    this.#setCompleted(event.currentTarget, false)
+                })
 
+        }
+        /**
+         * @param {HTMLElement} input
+         * @param {boolean} condition
+         */
+        #setActive(input, condition = true) {
+            const $textfield = this.#getTextfieldFloating(input)
+            if (typeof condition === 'boolean' && $textfield.length > 0) {
+                if (condition) {
+                    $textfield.addClass(TEXTFIELD_FLOATING_ACTIVE)
+                } else {
+                    $textfield.removeClass(TEXTFIELD_FLOATING_ACTIVE)
+                }
+            }
+        }
+        /**
+         * @param {boolean} condition
+         * @param {HTMLElement} input
+         */
+        #setCompleted(input, condition = true) {
+            const $textfield = this.#getTextfieldFloating(input)
+            if (typeof condition === 'boolean' && $textfield.length > 0) {
+                if (condition) {
+                    $textfield.addClass(TEXTFIELD_FLOATING_COMPLETED)
+                } else {
+                    $textfield.removeClass(TEXTFIELD_FLOATING_COMPLETED)
+                }
             }
         }
 
-        static validate() {
+        /**
+         * 
+         * @param {HTMLElement} input
+         * @returns {JQuery<Element>}
+         */
+        #getTextfieldFloating(input) {
+            return $(input).closest(`.${TEXTFIELD_FLOATING}`)
+        }
+
+        static #validate() {
             return $(ELEMENT_INPUT).length > 0;
         }
 
         static instance() {
-            if (Textfield.validate()) {
-                $("." + TEXTFIELD_FLOATING).each((i, element) => {
+            if (Textfield.#validate()) {
+                $(`.${TEXTFIELD_FLOATING}`).each((i, element) => {
                     new Textfield(element);
                 });
             }
         }
     }
-    Textfield.instance();
 
-    $(document).on('show.bs.modal', function (event) {
-        timeOut(700, () => Textfield.instance())
-    });
+    $(document).ready(() => {
+        Textfield.instance();
+    })
 
 })(jQuery); ;(function ($) {
     'use strict';

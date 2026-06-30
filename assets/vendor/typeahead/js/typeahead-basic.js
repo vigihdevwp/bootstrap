@@ -13,12 +13,6 @@
 
     class TypeaheadBasic {
 
-        options = {};
-
-        dataset = {};
-
-        dataOptions = {};
-
         /** @type {JQuery<Element>} */
         $element;
 
@@ -30,7 +24,7 @@
 
             this.$element = $(element)
             const dataOptions = this.$element.data('options')
-            this.dataOptions = JSON.parse(JSON.stringify(dataOptions))
+            this.dataOptions = this.#parseDataOptions(JSON.parse(JSON.stringify(dataOptions)))
 
             // Validator
             if (!this.dataOptions || typeof this.dataOptions !== 'object' || !this.dataOptions.data
@@ -49,7 +43,6 @@
             }, this.dataOptions.dataset)
 
             this.$element.typeahead(options, this.dataset);
-
             // console.log(TAG);
         }
 
@@ -71,6 +64,19 @@
             };
         };
 
+        #parseDataOptions(options) {
+            if (typeof options === 'object') {
+                Object.keys(options).forEach(key => {
+                    let value = options[key];
+                    if (typeof value === 'string' && /[{\[]+/.test(value.trim().slice(0, 1))) {
+                        value = JSON.parse(value)
+                        options[key] = value
+                    }
+                });
+            }
+            return options;
+        }
+
         static #validate() {
 
             return $(SELECTOR).length > 0
@@ -87,6 +93,8 @@
         }
     }
 
-    TypeaheadBasic.instance();
+    $(document).ready(() => {
+        TypeaheadBasic.instance();
+    })
 
 }(jQuery));

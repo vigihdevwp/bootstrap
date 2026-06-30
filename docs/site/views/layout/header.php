@@ -19,4 +19,5 @@
 <link href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
 <link href="/dist/css/owl.carousel.css" rel="stylesheet">
 <link href="/dist/css/select2.css" rel="stylesheet">
+<link href="/dist/css/typeahead.css" rel="stylesheet">
 <link href="/dist/css/date-time-picker.css" rel="stylesheet">

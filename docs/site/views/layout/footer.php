@@ -10,9 +10,13 @@
 </footer>
 <script type="text/javascript" src="/dist/js/jquery.min.js"></script>
 <script src="/dist/js/moment.js"></script>
+<script src="/dist/js/popper.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script> -->
 <script src="/dist/js/bootstrap.js"></script>
 <script src="/dist/js/app.js"></script>
 <script type="text/javascript" src="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/owl.carousel.js"></script>
 <!-- <script type="text/javascript" src="/dist/js/owl.carousel.js"></script> -->
 <script type="text/javascript" src="/dist/js/site.js"></script>
 <script type="text/javascript" src="/dist/js/select2.js"></script>
+<script type="text/javascript" src="/dist/js/typeahead.js"></script>
+<script type="text/javascript" src="/dist/js/date-time-picker.js"></script>

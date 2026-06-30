@@ -1,0 +1,28 @@
+.twitter-typeahead {
+    width: 100%;
+    .tt-hint {
+        color: #dedede;
+    }
+    .tt-input {
+    }
+    pre[aria-hidden="true"] {
+        width: 100%;
+    }
+    .tt-menu {
+        width: 100%;
+        background: $typeahead-menu-background;
+        @include material-shadow(2);
+        @include border-bottom-radius(8px);
+        .tt-dataset {
+            .tt-suggestion {
+                padding: $typeahead-suggestion-padding-y $typeahead-suggestion-padding-x;
+                border-bottom: 1px solid $typeahead-suggestion-border-color;
+                &.tt-selectable {
+                    &.tt-cursor {
+                        background: $typeahead-cursor-background;
+                    }
+                }
+            }
+        }
+    }
+}

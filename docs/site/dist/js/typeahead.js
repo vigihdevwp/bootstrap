@@ -2468,7 +2468,7 @@
 
         dataset = {};
 
-        /** @type {{remoteUrl:string,display:string}} */
+        /** @type {{remoteUrl:string,name:string}} */
         dataOptions = {};
 
         /** @type {JQuery<Element>} */
@@ -2482,47 +2482,61 @@
 
             this.$element = $(element)
             const dataOptions = this.$element.data('options')
-            this.dataOptions = dataOptions ? JSON.parse(JSON.stringify(dataOptions)) : undefined
+            this.dataOptions = dataOptions ? this.#parseDataOptions(JSON.parse(JSON.stringify(dataOptions))) : undefined
 
             // Validator
-            if (!this.dataOptions || typeof this.dataOptions !== 'object' || !this.dataOptions.remoteUrl || !this.dataOptions.display
+            if (!this.dataOptions || typeof this.dataOptions !== 'object' ||
+                !this.#keyExist(this.dataOptions, ['remoteUrl', 'name'])
             ) {
                 return;
             }
 
-            const dataset = this.dataOptions.dataset && typeof this.dataOptions.dataset === 'object' ?
-                this.dataOptions.dataset : {}
-
             const options = this.dataOptions.options && typeof this.dataOptions.options === 'object' ?
                 this.dataOptions.options : null
 
-            this.dataset = $.extend({
-                display: this.dataOptions.display,
-                source: this.bloodhound(this.dataOptions.remoteUrl, this.dataOptions.display)
-            }, this.dataOptions.dataset)
+            this.dataset = {
+                name: this.dataOptions.name,
+                source: this.bloodhound(this.dataOptions.remoteUrl)
+            }
 
             this.$element.typeahead(options, this.dataset);
 
-            // console.log(TAG);
         }
 
         /**
          *
          * @param {string} url
-         * @param {string} display
          * @return {Bloodhound}
          */
-        bloodhound(url, display) {
-            const newUrl = url.replace(/\/\w+\.json$/, '')
+        bloodhound(url) {
             return new Bloodhound({
-                datumTokenizer: Bloodhound.tokenizers.obj.whitespace(display),
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 prefetch: url,
-                remote: {
-                    url: `${newUrl}/queries/%QUERY.json`,
-                    wildcard: '%QUERY'
-                }
             });
+        }
+
+        /**
+         * 
+         * @param {Object} obj
+         * @param {string[]} keys
+         */
+        #keyExist(obj, keys) {
+            const items = Object.keys(obj).filter(key => keys.includes(key))
+            return items.length === keys.length;
+        }
+
+        #parseDataOptions(options) {
+            if (typeof options === 'object') {
+                Object.keys(options).forEach(key => {
+                    let value = options[key];
+                    if (typeof value === 'string' && /[{\[]+/.test(value.trim().slice(0, 1))) {
+                        value = JSON.parse(value)
+                        options[key] = value
+                    }
+                });
+            }
+            return options;
         }
 
         static #validate() {
@@ -2541,7 +2555,9 @@
         }
     }
 
-    TypeaheadAjax.instance();
+    $(document).ready(() => {
+        TypeaheadAjax.instance();
+    })
 
 }(jQuery))
 ;(function ($) {
@@ -2559,12 +2575,6 @@
 
     class TypeaheadBasic {
 
-        options = {};
-
-        dataset = {};
-
-        dataOptions = {};
-
         /** @type {JQuery<Element>} */
         $element;
 
@@ -2576,7 +2586,7 @@
 
             this.$element = $(element)
             const dataOptions = this.$element.data('options')
-            this.dataOptions = JSON.parse(JSON.stringify(dataOptions))
+            this.dataOptions = this.#parseDataOptions(JSON.parse(JSON.stringify(dataOptions)))
 
             // Validator
             if (!this.dataOptions || typeof this.dataOptions !== 'object' || !this.dataOptions.data
@@ -2595,7 +2605,6 @@
             }, this.dataOptions.dataset)
 
             this.$element.typeahead(options, this.dataset);
-
             // console.log(TAG);
         }
 
@@ -2617,6 +2626,19 @@
             };
         };
 
+        #parseDataOptions(options) {
+            if (typeof options === 'object') {
+                Object.keys(options).forEach(key => {
+                    let value = options[key];
+                    if (typeof value === 'string' && /[{\[]+/.test(value.trim().slice(0, 1))) {
+                        value = JSON.parse(value)
+                        options[key] = value
+                    }
+                });
+            }
+            return options;
+        }
+
         static #validate() {
 
             return $(SELECTOR).length > 0
@@ -2633,7 +2655,9 @@
         }
     }
 
-    TypeaheadBasic.instance();
+    $(document).ready(() => {
+        TypeaheadBasic.instance();
+    })
 
 }(jQuery));
 ;(function ($) {

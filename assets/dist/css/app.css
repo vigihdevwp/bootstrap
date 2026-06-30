@@ -596,6 +596,10 @@ h6,
     row-gap: 3rem !important;
   }
 }
+.user-select-none {
+  user-select: none !important;
+}
+
 .poppins-thin {
   font-family: "Poppins", sans-serif;
   font-weight: 100;
